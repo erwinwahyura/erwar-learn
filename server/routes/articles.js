@@ -1,8 +1,8 @@
 var express = require('express')
 var router = express.Router()
+var c_user = require('../controllers/users')
+var c_article = require('../controllers/articles')
 
-router.get('/', function(req, res) {
-  res.send('alive')
-})
+router.post('/', c_user.cekUser, c_article.add)
 
 module.exports = router

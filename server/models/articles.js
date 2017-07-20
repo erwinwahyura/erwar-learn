@@ -14,13 +14,9 @@ var articleSchema = new Schema({
     type: String,
     required: [true, 'please fill inspect']
   },
-  content: {
-    type: String,
-    required: [true, 'please fill inspect']
-  },
   author: { type: Schema.Types.ObjectId, ref: 'User'}
 })
 
-var user = mongoose.model('User', articleSchema)
+var article = mongoose.model('Article', articleSchema)
 
-module.exports = user
+module.exports = article
