@@ -50,8 +50,28 @@ var update = function(req, res) {
 }
 
 var getByAuthor = function(req, res) {
-  m_article.findOne({_id:req.params._id}, function(err, result) {
+  m_article.find({author: req.params.author}, function(err, result) {
     if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(result)
+    }
+  })
+}
+
+var getByCategory = function(req, res) {
+  m_article.find({category: req.params.category}, function(err, result) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(result)
+    }
+  })
+}
+
+var remove = function(req, res) {
+  m_article.deleteOne({_id: req.params._id}, function(err, result) {
+    if(err) {
       res.status(500).send(err)
     } else {
       res.status(200).send(result)
@@ -64,5 +84,7 @@ module.exports = {
   getAll,
   getById,
   update,
-  getByAuthor
+  getByAuthor,
+  getByCategory,
+  remove
 }
