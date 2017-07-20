@@ -59,6 +59,37 @@ export default {
         password: ''
       }
     }
+  },
+  methods: {
+    signin () {
+      var self = this
+      this.axios.post('http://localhost:3000/users/signin', {
+        username: self.user.username,
+        password: self.user.password
+      })
+      .then(response => {
+        console.log(response.data)
+        var token = response.data.token
+        var id = response.data.id
+        var username = response.data.username
+        localStorage.setItem('token', token)
+        localStorage.setItem('username', username)
+        localStorage.setItem('id', id)
+        self.$router.push('/')
+      })
+      .catch(err => console.log(err))
+    },
+    signup () {
+      this.axios.post('http://localhost:3000/users/signup', {
+        username: this.userRegis.username,
+        password: this.userRegis.password
+      })
+      .then(response => {
+        console.log(response.data)
+        this.$router.push('/auth')
+      })
+      .catch(err => console.log(err))
+    }
   }
 }
 </script>
