@@ -49,9 +49,20 @@ var update = function(req, res) {
   })
 }
 
+var getByAuthor = function(req, res) {
+  m_article.findOne({_id:req.params._id}, function(err, result) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(result)
+    }
+  })
+}
+
 module.exports = {
   add,
   getAll,
   getById,
-  update
+  update,
+  getByAuthor
 }

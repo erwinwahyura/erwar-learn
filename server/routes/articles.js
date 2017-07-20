@@ -7,5 +7,6 @@ router.post('/', c_user.cekUser, c_article.add)
 router.get('/', c_article.getAll)
 router.get('/:_id', c_article.getById)
 router.put('/:_id', c_user.cekUser, c_article.update)
+router.get('/:_id', c_article.getByAuthor)
 
 module.exports = router
