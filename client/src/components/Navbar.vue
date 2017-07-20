@@ -24,8 +24,8 @@
               <span style="font-weight: bold;">Grettings, {{ name }}</span>
             </template>
 
-            <b-dropdown-item to="/auth">+ Add Article</b-dropdown-item>
-            <b-dropdown-item to="/auth">Sign Out</b-dropdown-item>
+            <b-dropdown-item to="/add_article">+ Add Article</b-dropdown-item>
+            <b-dropdown-item @click="logout()">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
 
         </b-nav>
@@ -77,6 +77,10 @@ export default {
   //   ])
   // },
   methods: {
+    logout () {
+      localStorage.clear()
+      this.$router.push('/')
+    }
   },
   created () {
     this.name = localStorage.getItem('username')

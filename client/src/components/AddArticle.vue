@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <br>
+      <br>
       <div class="col-md-6 offset-md-3 add">
         <br>
         <label for="title">TITLE</label>
@@ -11,11 +12,11 @@
         <b-form-input textarea v-model="add.description" placeholder="Enter your description"></b-form-input>
         <br>
         <label for="title">CATEGORY</label>
-        <b-form-input v-model="add.category" type="text" placeholder="Enter your title"></b-form-input>
+        <b-form-input v-model="add.category" type="text" placeholder="Enter your category"></b-form-input>
         <br>
         <div class="row">
           <div class="col-md-12">
-            <b-button class="col-md-12 btn btn-success" @click="add()">SUBMIT</b-button>
+            <b-button class="col-md-12 btn btn-success" @click="addArticle()">SUBMIT</b-button>
           </div>
         </div>
         <br>
@@ -32,18 +33,30 @@ export default {
         title: '',
         description: '',
         category: ''
-      }
+      },
+      articles: []
     }
   },
   methods: {
-    add () {
+    addArticle () {
       this.axios.post('http://localhost:3000/api/articles', {
-        
+        title: this.add.title,
+        content: this.add.content,
+        category: this.add.category,
+        author: localStorage.getItem('id')
+      }, {headers: {token: localStorage.getItem('token')}})
+      .then(response => {
+        console.log(response.data)
+        this.articles = response.data
+        this.$router.push('/')
       })
+      .catch(err => console.log(err))
     }
   }
 }
 </script>
-
-<style lang="css">
+<style lang="css" scoped>
+.col-md-6 {
+  border: 1px solid #e4e6e8;
+}
 </style>
