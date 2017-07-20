@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar></Navbar>
+    <Navbar :islogin="islogin"></Navbar>
     <router-view></router-view>
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 export default {
+  props: ['islogin'],
   components: {
     Navbar
   },

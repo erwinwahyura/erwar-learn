@@ -85,7 +85,10 @@ export default {
         password: this.userRegis.password
       })
       .then(response => {
+        this.userRegis.username = ''
+        this.userRegis.password = ''
         console.log(response.data)
+
         this.$router.push('/auth')
       })
       .catch(err => console.log(err))

@@ -18,7 +18,12 @@ export const store = new Vuex.Store({
   },
   mutations: {
     cekLogin (state, value) {
-      return state.islogin = value
+      state.islogin = value
+    }
+  },
+  actions: {
+    cekLogin ({ commit }, value) {
+      commit('cekLogin', value)
     }
   }
 })
