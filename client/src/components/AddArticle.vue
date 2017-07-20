@@ -39,18 +39,18 @@ export default {
   },
   methods: {
     addArticle () {
+      var self = this
       this.axios.post('http://localhost:3000/api/articles', {
-        title: this.add.title,
-        content: this.add.content,
-        category: this.add.category,
+        title: self.add.title,
+        content: self.add.content,
+        category: self.category,
         author: localStorage.getItem('id')
-      }, {headers: {token: localStorage.getItem('token')}})
-      .then(response => {
+      }, {headers: { token: localStorage.getItem('token') }})
+      .then((response) => {
         console.log(response.data)
-        this.articles = response.data
-        this.$router.push('/')
+        alert('Add Todo Success!')
       })
-      .catch(err => console.log(err))
+      .catch((err) => { console.log(err) })
     }
   }
 }
