@@ -12,7 +12,7 @@ var signin = function(req, res, next) {
       res.status(500).send(err)
     }
     else if (user_result) {
-      bcrypt.compare(password, result.password)
+      bcrypt.compare(password, user_result.password)
       .then(result => {
         if(result) {
           var token = jwt.sign({id: user_result._id, username: user_result.username}, process.env.SECRETKEY)
@@ -63,7 +63,7 @@ var cekUser = function(req, res, next) {
   }
 }
 
-module.exporst = {
+module.exports = {
   signin,
   signup,
   cekUser
