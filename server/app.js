@@ -16,6 +16,7 @@ var user = require('./routes/users')
 var article = require('./routes/articles')
 
 var app = express()
+app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -24,7 +25,6 @@ app.use(bodyParser.json())
 app.use('/', index)
 app.use('/users', user)
 app.use('/api/articles', article)
-app.use(cors())
 
 app.listen(3000)
 

@@ -17,23 +17,29 @@ var add = function(req, res) {
 }
 
 var getAll = function(req, res) {
-  m_article.find({}, function(err, result) {
-    if (err) {
-      res.status(500).send(err)
+  m_article.find({})
+  .populate('author')
+  .populate({path: 'username', select: 'username'})
+  .exec(function(err, result) {
+    if(!err) {
+      res.send(result)
     } else {
-      res.status(200).send(result)
+      console.log(err);
     }
   })
 }
 
 var getById = function(req, res) {
-  m_article.findOne({_id:req.params._id}, function(err, result) {
-    if (err) {
-      res.status(500).send(err)
-    } else {
-      res.status(200).send(result)
-    }
-  })
+  m_article.findOne({_id:req.params._id})
+    .populate('author')
+    .populate({path: 'username', select: 'username'})
+    .exec(function(err, result) {
+      if(!err) {
+        res.send(result)
+      } else {
+        console.log(err);
+      }
+    })
 }
 
 var update = function(req, res) {

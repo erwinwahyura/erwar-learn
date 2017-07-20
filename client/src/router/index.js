@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import Hello from '@/components/Hello'
 import Auth from '@/components/Auth'
 import AddArticle from '@/components/AddArticle'
 import Detail from '@/components/Detail'
@@ -15,7 +16,11 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '/:id',
+          path: '',
+          component: Hello
+        },
+        {
+          path: '/detail/:id',
           component: Detail,
           props: true
         }

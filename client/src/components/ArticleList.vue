@@ -5,7 +5,7 @@
         <b-card v-for="la in listArticles">
           <b-media>
             <img slot="aside" src="http://placeskull.com/200/200/ABABAB/-1/0">
-            <h5 class="mt-0">{{ la.title }}</h5>
+            <h5 class="mt-0"><router-link :to="'/detail/'+la._id">{{ la.title }}</router-link></h5>
             <p>author: {{ la.author.username }}</p>
           </b-media>
         </b-card>

@@ -5,6 +5,9 @@
         <ArticleList></ArticleList>
       </div>
     </div>
+    <div class="col-md-8">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

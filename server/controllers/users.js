@@ -16,7 +16,7 @@ var signin = function(req, res, next) {
       .then(result => {
         if(result) {
           var token = jwt.sign({id: user_result._id, username: user_result.username}, process.env.SECRETKEY)
-          res.send({token, username: user_result.username})
+          res.send({token, username: user_result.username, id: user_result._id})
         } else {
           res.send({msg: "password salah"})
         }
