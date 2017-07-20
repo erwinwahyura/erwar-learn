@@ -36,8 +36,22 @@ var getById = function(req, res) {
   })
 }
 
+var update = function(req, res) {
+  let id = req.params._id
+  m_article.findById({_id: id}, function(err, resultFind) {
+    m_article.findOneAndUpdate({_id: id}, {$set: {title: req.body.title || resultFind.title, content: req.body.content || resultFind.content, category: req.body.category || resultFind.category, author: resultFind.author }}, function(err, result) {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        res.status(200).send(result)
+      }
+    })
+  })
+}
+
 module.exports = {
   add,
   getAll,
-  getById
+  getById,
+  update
 }
