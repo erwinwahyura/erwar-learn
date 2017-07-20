@@ -16,6 +16,17 @@ var add = function(req, res) {
   })
 }
 
+var getAll = function(req, res) {
+  m_article.find({}, function(err, result) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(result)
+    }
+  })
+}
+
 module.exports = {
-  add
+  add,
+  getAll
 }
