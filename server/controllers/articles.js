@@ -26,7 +26,18 @@ var getAll = function(req, res) {
   })
 }
 
+var getById = function(req, res) {
+  m_article.findOne({_id:req.params._id}, function(err, result) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(result)
+    }
+  })
+}
+
 module.exports = {
   add,
-  getAll
+  getAll,
+  getById
 }
