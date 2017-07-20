@@ -1,5 +1,5 @@
 var express = require('express')
-var bodyParser = requre('body-parser')
+var bodyParser = require('body-parser')
 var cors = require('cors')
 var mongoose = require('mongoose');
 
@@ -10,16 +10,22 @@ db.once('open', function() {
   // we're connected!
   console.log("Database Connected!");
 });
+
 var index = require('./routes/index')
+var user = require('./routes/users')
+var article = require('./routes/articles')
 
 var app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
 app.use(bodyParser.json())
 
 app.use('/', index)
+app.use('/users', user)
+app.use('/api/articles', article)
 app.use(cors())
+
+app.listen(3000)
 
 module.exports = app
