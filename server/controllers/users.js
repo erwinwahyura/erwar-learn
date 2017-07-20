@@ -46,16 +46,29 @@ var signup = function(req, res, next) {
   })
 }
 
+var getAllUser = function(req, res, next) {
+  m_user.find({}, function(err, result) {
+    if(err) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).send(result)
+    }
+  })
+}
+
 var cekUser = function(req, res, next) {
   let token = req.headers.token
   console.log(token);
   if(token) {
     jwt.verify(token, process.env.SECRETKEY, (err, decoded) => {
-      console.log('ini decoded ', decoded);
-      if(decoded.id == req.params.id) {
-        next()
-      } else {
-        res.send(err)
+      if (!err) {
+        console.log('ini decoded ', decoded);
+        console.log(req.body.author);
+        if(decoded.id == req.body.author) {
+          next()
+        } else {
+          res.send(err)
+        }
       }
     })
   } else {
@@ -66,5 +79,6 @@ var cekUser = function(req, res, next) {
 module.exports = {
   signin,
   signup,
-  cekUser
+  cekUser,
+  getAllUser
 }
